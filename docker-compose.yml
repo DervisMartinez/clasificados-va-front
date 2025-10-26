@@ -1,0 +1,19 @@
+services:
+  nextjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nextjs_front
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    extra_hosts:
+      - "panel.vallealto.com.ve:190.120.248.19"
+    volumes:
+      - ./public/.well-known:/app/public/.well-known
+    environment:
+      - NODE_OPTIONS=--tls-min-v1.2
+      - NODE_ENV=production
+    command: ["npm", "start"]
+    restart: always
+
